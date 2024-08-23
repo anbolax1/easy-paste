@@ -6,6 +6,8 @@ services:
       context: ./backend
     volumes:
       - ./backend:/var/www
+    ports:
+    - "9000:9000"
     networks:
       - easy_paste_network
 
@@ -14,6 +16,8 @@ services:
       context: ./frontend
     volumes:
       - ./frontend:/app
+    ports:
+      - "3000:3000"
     command: sh -c "npm run build && npm start"
     networks:
       - easy_paste_network
