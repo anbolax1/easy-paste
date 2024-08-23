@@ -12,9 +12,9 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'login' => 'required|string|max:255|unique:users',
             'email' => 'nullable|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:3',
         ]);
 
         if ($validator->fails()) {
@@ -22,17 +22,17 @@ class AuthController extends Controller
         }
 
         $user = User::create([
-            'name' => $request->name,
+            'login' => $request->login,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
+        return response()->json(['message' => 'Пользователь успешно зарегистрирован', 'user' => $user], 201);
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('login', 'password');
 
         if (auth()->attempt($credentials)) {
             $user = auth()->user();
@@ -46,8 +46,14 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        $user = $request->user();
 
-        return response()->json(['message' => 'Logged out successfully']);
+        if(!$user) {
+            return response()->json(['message' => 'Пользователь не найден'], 401);
+        }
+
+        $user->tokens()->delete();
+
+        return response()->json(['message' => 'Токен удалён']);
     }
 }
