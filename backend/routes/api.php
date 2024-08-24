@@ -21,12 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('/pastes', [PasteController::class, 'get']);
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-//Route::middleware([Authenticate::class])->post('/logout', [AuthController::class, 'logout']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
-//Route::post('/logout', [AuthController::class, 'logout']);
+
+Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
+Route::get('/paste', [PasteController::class, 'getPaste']);
+Route::middleware('auth:sanctum')->get('/pastes', [PasteController::class, 'getPastes']);
 
