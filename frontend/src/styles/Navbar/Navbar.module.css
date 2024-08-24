@@ -1,0 +1,27 @@
+.nav {
+    background-color: #4a90e2;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between; /* Разделяем меню на две части */
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center; /* Выравнивание по центру */
+}
+
+/* Стили для блока авторизации */
+.authMenu {
+    display: flex;
+}
+
+.logoContainer {
+    flex-grow: 1; /* Позволяет логотипу занять доступное пространство */
+    display: flex;
+    justify-content: center; /* Центрирует логотип */
+}
+
+.logo {
+    max-height: 50px; /* Установите нужную высоту для логотипа */
+}

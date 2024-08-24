@@ -1,0 +1,18 @@
+.li {
+    margin: 0 15px;
+}
+
+.a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px; /* Отступы для кнопок */
+    border-radius: 5px; /* Скругление углов */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Плавный переход */
+    background-color: transparent;
+}
+
+.a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Светлый фон при наведении */
+    transform: scale(1.05); /* Увеличение при наведении */
+}
