@@ -10,10 +10,10 @@ const NavItem = ({ href, children, onClick}) => {
     );
 };
 
+export default NavItem;
+
 NavItem.propTypes = {
     href: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
 };
-
-export default NavItem;

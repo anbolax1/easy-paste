@@ -1,0 +1,19 @@
+.block {
+    border: 1px solid #c6c6c6;
+    border-radius: 10px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.items {
+    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+
+
+}
+
+.title {
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+}

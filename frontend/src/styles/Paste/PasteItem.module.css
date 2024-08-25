@@ -1,0 +1,66 @@
+.a {
+    display: flex;
+    flex-direction: column;
+    height: 4.5rem;
+    color: grey;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Плавный переход */
+    background-color: transparent;
+}
+
+.div {
+    max-height: 100%;
+    flex-grow: 1;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.15;
+}
+
+.div:hover {
+    transform: scale(1.02);
+}
+
+.pasteInfo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    margin: 0;
+    font-size: 0.8rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.content {
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: normal;
+    max-width: 100%;
+    flex-grow: 1;
+    overflow: hidden; /* Это можно оставить, если вы хотите скрыть переполнение */
+    white-space: normal; /* Измените с nowrap на normal для переноса текста */
+    text-overflow: ellipsis; /* Это может быть убрано, если вы хотите видеть весь текст */
+}
+
+.language {
+    margin: 0;
+    font-size: 0.8em;
+    min-width: 10%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+

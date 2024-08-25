@@ -5,10 +5,10 @@ import NavItem from "./NavItem";
 import Logo from "./Logo";
 
 const Navbar = ({ isAuthenticated }) => {
-    let myPastesUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/my-pastes`;
-    let createPasteUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/create`;
-    let loginUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/login`;
-    let registerUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/register`;
+    const myPastesUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/my-pastes`;
+    const createPasteUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/create`;
+    const loginUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/login`;
+    const registerUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/register`;
 
     return (
         <nav className={styles.nav}>

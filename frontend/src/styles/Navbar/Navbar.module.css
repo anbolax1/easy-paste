@@ -2,26 +2,35 @@
     background-color: #4a90e2;
     padding: 15px;
     display: flex;
-    justify-content: space-between; /* Разделяем меню на две части */
+    justify-content: space-between;
+    flex-wrap: wrap
 }
 
 .nav ul {
     list-style: none;
     display: flex;
-    align-items: center; /* Выравнивание по центру */
+    align-items: center;
+    padding-inline-start: 0;
 }
 
-/* Стили для блока авторизации */
 .authMenu {
     display: flex;
 }
 
 .logoContainer {
-    flex-grow: 1; /* Позволяет логотипу занять доступное пространство */
+    flex-grow: 1;
     display: flex;
-    justify-content: center; /* Центрирует логотип */
+    justify-content: center;
 }
 
 .logo {
-    max-height: 50px; /* Установите нужную высоту для логотипа */
+    max-height: 50px;
 }
+
+
+/*
+@media (max-width: 565px) {
+    .nav ul {
+        padding-inline-start: 0;
+    }
+}*/
