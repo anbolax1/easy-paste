@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
-import styles from '../styles/Login.module.css';
+import AuthForm from "../components/AuthForm";
 
 
 const Login = ({ setIsAuthenticated }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+    const handleLogin = async ({ login, password }) => {
         try {
-            const response = await axios.post('/api/login', { email, password });
+            const response = await axios.post('/api/login', { login, password });
             if (response.data.success) {
                 setIsAuthenticated(true);
             }
@@ -20,13 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
     };
 
     return (
-        <div className={styles.formContainer}>
-            <form onSubmit={handleLogin}>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Пароль" required />
-                <button type="submit">Войти</button>
-            </form>
-        </div>
+        <AuthForm onSubmit={handleLogin} buttonText='Войти'/>
     );
 };
 

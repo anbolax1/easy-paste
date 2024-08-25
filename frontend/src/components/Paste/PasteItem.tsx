@@ -10,8 +10,9 @@ const PasteItem = ({ title, content, language, hash }) => {
             <div className={styles.div}>
                 <div className={styles.pasteInfo}>
                     <p className={styles.title}>{title}</p>
+                    {language &&
                     <p className={styles.language}>{language}</p>
-
+                    }
                 </div>
                 <div className={styles.content}>{content}</div>
             </div>
