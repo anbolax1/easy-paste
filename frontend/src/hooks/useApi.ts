@@ -16,7 +16,7 @@ const useApi = () => {
                 headers,
                 params,
             });
-
+            console.log(res);
             if (res.status === 200) {
                 return res;
             }
