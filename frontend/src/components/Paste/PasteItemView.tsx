@@ -10,9 +10,9 @@ const PasteDisplay = ({ title, content, expiresAt, visibility, language }) => {
 
     useEffect(() => {
         const countdown = setInterval(() => {
-            const now = new Date();
+            const now: any = new Date();
             // Преобразуем строку в формат Date
-            const expirationDate = new Date(expiresAt.replace(' ', 'T') + 'Z'); // добавляем Z для UTC
+            const expirationDate: any = new Date(expiresAt.replace(' ', 'T') + 'Z'); // добавляем Z для UTC
             const difference = expirationDate - now;
 
             if (difference <= 0) {

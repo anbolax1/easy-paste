@@ -2,15 +2,15 @@ import axios from "axios";
 
 const useApi = () => {
     const api = async (
-        url: string,
+        endpoint: string,
         method = 'get',
-        data = null,
         headers = {},
+        data = null,
         params = {}
     ) => {
         try {
             const res = await axios({
-                url: `${process.env.NEXT_PUBLIC_BASE_API}/${url}`,
+                url: `${process.env.NEXT_PUBLIC_BASE_API}/${endpoint}`,
                 method,
                 data,
                 headers,
@@ -23,7 +23,7 @@ const useApi = () => {
         }
         catch (e: any) {
             if(e.name == 'CanceledError') {
-                console.log(`Request ${url} has been aborted`)
+                console.log(`Request ${endpoint} has been aborted`)
             } else {
                 console.log(`Error name: ${e.name}; Error message: ${e.message}/`)
             }

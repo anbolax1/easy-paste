@@ -34,9 +34,8 @@ class PasteController extends Controller
         return response()->json(['link' => url($paste->hash)]);
     }
 
-    public function getPaste(Request $request)
+    public function getPaste($hash)
     {
-        $hash = $request->hash;
         $paste = Paste::where('hash', $hash)->first();
 
         if(!$paste) {

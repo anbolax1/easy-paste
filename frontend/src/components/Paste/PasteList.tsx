@@ -7,57 +7,15 @@ const PasteList = ({title, pastes}) => {
         <div className={styles.block}>
             <p className={styles.title}>{title}</p>
             <div className={styles.items}>
-                <PasteItem key='caupkqjg'
-                           title='Paste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste OnePaste One'
-                           content='Paste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one contentPaste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                <PasteItem key='caupkqjg'
-                           title='Paste One'
-                           content='Paste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                <PasteItem key='caupkqjg'
-                           title='Paste One'
-                           content='Paste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                <PasteItem key='caupkqjg'
-                           title='Paste One'
-                           content='Paste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                <PasteItem key='caupkqjg'
-                           title='Paste One'
-                           content='Paste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                <PasteItem key='caupkqjg'
-                           title='Paste One'
-                           content='Paste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                <PasteItem key='caupkqjg'
-                           title='Paste One'
-                           content='Paste one content'
-                           language='PHP'
-                           hash='caupkqjg'
-                />
-                {/*{pastes.map((record) => (
+                {pastes.map((record) => (
                 <PasteItem
                     key={record.hash}
                     title={record.title}
-                    content={record.content}
+                    content={record.paste_content}
                     language={record.language}
                     hash={record.hash}
                 />
-            ))}*/}
+            ))}
             </div>
         </div>
 

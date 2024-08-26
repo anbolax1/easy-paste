@@ -26,6 +26,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
-Route::get('/paste', [PasteController::class, 'getPaste']);
+Route::get('/paste/{hash}', [PasteController::class, 'getPaste']);
 Route::middleware('auth:sanctum')->get('/pastes', [PasteController::class, 'getPastes']);
 

@@ -1,6 +1,9 @@
 import PasteItemView from "../components/Paste/PasteItemView";
+import {getPasteInfo, getPastes} from "../functions/getData";
+import {MainPageContext} from "./index";
+import {NextPageContext} from "next";
 
-const PasteView = () => {
+const PasteView = ({paste}) => {
 
     const pasteData = {
         title: "Пример пасты",
@@ -14,10 +17,10 @@ const PasteView = () => {
     return (
         <div>
             <PasteItemView
-                title={pasteData.title}
-                content={pasteData.content}
-                expiresAt={pasteData.expiresAt}
-                visibility={pasteData.visibility}
+                title={paste.title}
+                content={paste.paste_content}
+                expiresAt={paste.expires_at}
+                visibility={paste.visibility}
                 language={pasteData.language}
             />
         </div>
@@ -25,3 +28,23 @@ const PasteView = () => {
 };
 
 export default PasteView;
+
+interface PasteViewPageContext extends NextPageContext {
+    query: {
+        hash: string
+    }
+}
+
+export async function getServerSideProps(context: PasteViewPageContext) {
+    let query = context.query;
+    let hash = query.hash;
+
+    let paste = await getPasteInfo(`paste/${hash}`, 'get')
+
+    console.log(paste);
+    return {
+        props: {
+            paste: paste
+        }
+    }
+}
