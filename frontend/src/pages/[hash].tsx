@@ -17,13 +17,11 @@ const PasteView = () => {
     const [paste, setPaste] = useState<Paste | null>(null);
 
     const hash = router.query.hash;
-    console.log(hash);
 
     useEffect(() => {
         const fetchPaste = async () => {
             const res = await fetch(`http://localhost/api/paste/${hash}`);
             const data = await res.json();
-            console.log(data);
             setPaste(data);
         };
         if(hash) {

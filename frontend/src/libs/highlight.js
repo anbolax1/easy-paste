@@ -14,7 +14,7 @@ import excel from 'highlight.js/lib/languages/excel';
 import fortran from 'highlight.js/lib/languages/fortran';
 import go from 'highlight.js/lib/languages/go';
 import graphql from 'highlight.js/lib/languages/graphql';
-import haskell from 'highlight.js/lib/languages/haskell';
+// import haskell from 'highlight.js/lib/languages/haskell';
 import http from 'highlight.js/lib/languages/http';
 import java from 'highlight.js/lib/languages/java';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -50,7 +50,6 @@ const languages = {
     fortran,
     go,
     graphql,
-    haskell,
     http,
     java,
     javascript,

@@ -15,14 +15,18 @@ const CodeInputWithHighlight = ({onChange}) => {
         const detectedLanguage = hljs.highlightAuto(value).language || 'plaintext';
         setLanguage(detectedLanguage);
 
+        codeRef.current.innerHTML = value;
+
         // Вызываем коллбек для передачи данных родителю
-        onChange(value, detectedLanguage);
+        // onChange(value, detectedLanguage);
     };
 
     useEffect(() => {
+
         if (codeRef.current) {
             codeRef.current.innerHTML = hljs.highlight(code, { language }).value;
         }
+        onChange(code, language);
     }, [code, language]);
 
     return (
@@ -76,7 +80,8 @@ const CodeInputWithHighlight = ({onChange}) => {
                     fontSize: '0.84rem',
                     lineHeight: '1.5'
                 }}
-            />
+            >
+            </pre>
         </div>
     );
 };
