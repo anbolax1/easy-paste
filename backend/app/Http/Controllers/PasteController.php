@@ -54,10 +54,23 @@ class PasteController extends Controller
         // Проверяем, авторизован ли пользователь
         if (auth()->check()) {
             // Если авторизован, получаем 10 последних записей пользователя
-            $pastes = Paste::where('user_id', auth()->id())->latest()->take(10)->get();
+            $pastes = Paste::where('user_id', auth()->id())
+                ->where(function($query) {
+                    $query->where('expires_at', '>', now())
+                        ->orWhereNull('expires_at');
+                })
+                ->latest()
+                ->take(10)
+                ->get();
         } else {
             // Если не авторизован, получаем 10 последних записей
-            $pastes = Paste::latest()->take(10)->get();
+            $pastes = Paste::where(function($query) {
+                    $query->where('expires_at', '>', now())
+                        ->orWhereNull('expires_at');
+                })
+                ->latest()
+                ->take(10)
+                ->get();
         }
 
         return response()->json($pastes);
