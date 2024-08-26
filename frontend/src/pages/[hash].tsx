@@ -26,7 +26,9 @@ const PasteView = () => {
             console.log(data);
             setPaste(data);
         };
-        fetchPaste();
+        if(hash) {
+            fetchPaste();
+        }
     }, [hash]);
 
     return (
