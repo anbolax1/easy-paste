@@ -31,7 +31,7 @@ class PasteController extends Controller
             'language' => $request->language,
         ]);
 
-        return response()->json(['link' => url($paste->hash)]);
+        return response()->json(['hash' => $paste->hash]);
     }
 
     public function getPaste($hash)
