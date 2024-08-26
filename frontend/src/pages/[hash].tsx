@@ -1,18 +1,33 @@
 import PasteItemView from "../components/Paste/PasteItemView";
-import {getPasteInfo, getPastes} from "../functions/getData";
-import {MainPageContext} from "./index";
-import {NextPageContext} from "next";
+// import {getPasteInfo, getPastes} from "../functions/getData";
+// import {NextPageContext} from "next";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 
-const PasteView = ({paste}) => {
+interface Paste {
+    title: string;
+    paste_content: string;
+    expires_at: string;
+    visibility: string;
+    language?: string;
+}
 
-    const pasteData = {
-        title: "Пример пасты",
-        content: 'SELECT * FROM `pastes`\n',
+const PasteView = () => {
+    const router = useRouter();
+    const [paste, setPaste] = useState<Paste | null>(null);
 
-        expiresAt: "2024-08-26 06:31",
-        visibility: "Публичная",
-        language: "JavaScript"
-    };
+    const hash = router.query.hash;
+    console.log(hash);
+
+    useEffect(() => {
+        const fetchPaste = async () => {
+            const res = await fetch(`http://localhost/api/paste/${hash}`);
+            const data = await res.json();
+            console.log(data);
+            setPaste(data);
+        };
+        fetchPaste();
+    }, [hash]);
 
     return (
         <div>
@@ -29,6 +44,7 @@ const PasteView = ({paste}) => {
 
 export default PasteView;
 
+/*
 interface PasteViewPageContext extends NextPageContext {
     query: {
         hash: string
@@ -46,4 +62,4 @@ export async function getServerSideProps(context: PasteViewPageContext) {
             paste: paste
         }
     }
-}
+}*/

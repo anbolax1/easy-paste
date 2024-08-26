@@ -38,7 +38,7 @@ const PasteDisplay = ({ title, content, expiresAt, visibility, language }) => {
     }, [expiresAt]);
 
     useEffect(() => {
-        if (codeRef.current) {
+        if (language && codeRef.current) {
             codeRef.current.innerHTML = hljs.highlight(content, { language }).value;
         }
     })
