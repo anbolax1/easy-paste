@@ -12,21 +12,26 @@ const PasteDisplay = ({ title, content, expiresAt, visibility, language }) => {
         const countdown = setInterval(() => {
             const now: any = new Date();
             // Преобразуем строку в формат Date
-            const expirationDate: any = new Date(expiresAt.replace(' ', 'T') + 'Z'); // добавляем Z для UTC
-            const difference = expirationDate - now;
+            if(expiresAt) {
+                const expirationDate: any = new Date(expiresAt.replace(' ', 'T') + 'Z'); // добавляем Z для UTC
+                const difference = expirationDate - now;
 
-            if (difference <= 0) {
-                clearInterval(countdown);
-                setTimeLeft('Время истекло');
+                if (difference <= 0) {
+                    clearInterval(countdown);
+                    setTimeLeft('Время истекло');
+                } else {
+                    const weeks = Math.floor(difference / (1000 * 60 * 60 * 24 * 7));
+                    const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    setTimeLeft(`${weeks}н ${days}д ${hours}ч ${minutes}м ${seconds}с`);
+                }
             } else {
-                const weeks = Math.floor(difference / (1000 * 60 * 60 * 24 * 7));
-                const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                setTimeLeft(`${weeks}н ${days}д ${hours}ч ${minutes}м ${seconds}с`);
+                setTimeLeft('Бессрочно');
             }
+
         }, 1000);
 
         return () => clearInterval(countdown); // Очистка интервала при размонтировании
