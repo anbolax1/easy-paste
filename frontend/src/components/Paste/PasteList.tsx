@@ -7,7 +7,7 @@ const PasteList = ({title, pastes}) => {
         <div className={styles.block}>
             <p className={styles.title}>{title}</p>
             <div className={styles.items}>
-                {pastes.map((record) => (
+                {pastes && pastes.map((record) => (
                 <PasteItem
                     key={record.hash}
                     title={record.title}
