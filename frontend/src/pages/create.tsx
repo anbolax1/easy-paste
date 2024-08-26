@@ -23,7 +23,9 @@ const CreatePaste = () => {
 
     useEffect(() => {
         if (hash) {
-            window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${hash}`;
+            const url = `${process.env.NEXT_PUBLIC_BASE_URL}/${hash}`;
+            console.log(url);
+            window.location.href = url;
         }
     }, [hash]);
     return (
