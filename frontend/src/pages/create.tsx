@@ -1,15 +1,31 @@
 import styles from '../styles/CreatePaste/Create.module.css';
 import CreatePasteForm from "../components/CreatePasteForm/CreatePasteForm";
-import axios from "axios";
+import {useApi} from "../hooks/useApi";
+import {useEffect, useState} from "react";
+
+const { api } = useApi();
 
 const CreatePaste = () => {
+    const [hash, setHash] = useState(null);
+
     const handlePasteCreate = async ({ title, content, expiresAt, visibility, language }) => {
-       /* try {
-            const response = await axios.post('/api/paste', { title, content, expiresAt, visibility, language });
+        try {
+            let headers = {};
+            const response = await api('paste', 'post', headers, { title: title, paste_content: content, expires_at: expiresAt.value, visibility: visibility.value, language: language });
+
+            if (response && response.data.hash) {
+                setHash(response.data.hash);
+            }
         } catch (error) {
-            console.error('Ошибка авторизации:', error);
-        }*/
+            console.error(error);
+        }
     };
+
+    useEffect(() => {
+        if (hash) {
+            window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${hash}`;
+        }
+    }, [hash]);
     return (
         <div className={styles.container}>
             <h1>Создать пасту</h1>

@@ -17,11 +17,11 @@ const PasteView = ({paste}) => {
     return (
         <div>
             <PasteItemView
-                title={paste.title}
-                content={paste.paste_content}
-                expiresAt={paste.expires_at}
-                visibility={paste.visibility}
-                language={pasteData.language}
+                title={paste?.title}
+                content={paste?.paste_content}
+                expiresAt={paste?.expires_at}
+                visibility={paste?.visibility}
+                language={paste?.language}
             />
         </div>
     );
@@ -41,7 +41,6 @@ export async function getServerSideProps(context: PasteViewPageContext) {
 
     let paste = await getPasteInfo(`paste/${hash}`, 'get')
 
-    console.log(paste);
     return {
         props: {
             paste: paste
