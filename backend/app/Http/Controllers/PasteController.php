@@ -9,29 +9,29 @@ class PasteController extends Controller
 {
     public function createPaste(Request $request)
     {
-        // Проверка аутентификации
-        /*if (!auth()->check()) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }*/
+        try {
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'paste_content' => 'required|string',
+                'visibility' => 'required|in:public,unlisted,private',
+                'expires_at' => 'nullable|in:' . implode(',', Paste::EXPIRATION_OPTIONS),
+                'language' => 'nullable|string|max:50',
+            ]);
 
-        $request->validate([
-           'title' => 'required|string|max:255',
-           'paste_content' => 'required|string',
-           'visibility' => 'required|in:public,unlisted,private',
-           'expires_at' => 'nullable|in:' . implode(',', Paste::EXPIRATION_OPTIONS),
-           'language' => 'nullable|string|max:50',
-        ]);
+            $paste = Paste::create([
+                'title' => $request->title,
+                'paste_content' => $request->paste_content,
+                'user_id' => auth()->id(),
+                'visibility' => $request->visibility,
+                'expires_at' => Paste::getExpirationTime($request->expires_at),
+                'language' => $request->language,
+            ]);
 
-        $paste = Paste::create([
-            'title' => $request->title,
-            'paste_content' => $request->paste_content,
-            'user_id' => auth()->id(),
-            'visibility' => $request->visibility,
-            'expires_at' => Paste::getExpirationTime($request->expires_at),
-            'language' => $request->language,
-        ]);
-
-        return response()->json(['hash' => $paste->hash]);
+            return response()->json(['hash' => $paste->hash]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function getPaste($hash)

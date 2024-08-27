@@ -50,14 +50,27 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('login', 'password');
+        try {
+            $validator = Validator::make($request->all(), [
+                'login' => 'required|string',
+                'password' => 'required|string',
+            ]);
 
-        $token = $this->authService->authenticateUser($credentials);
-        if ($token) {
-            return response()->json(['token' => $token]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $credentials = $request->only('login', 'password');
+
+            $token = $this->authService->authenticateUser($credentials);
+            if ($token) {
+                return response()->json(['token' => $token]);
+            }
+
+            return response()->json(['message' => 'Unauthorized'], 401);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        return response()->json(['message' => 'Unauthorized'], 401);
     }
 
     public function logout(Request $request)

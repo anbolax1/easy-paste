@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasteController;
-use App\Http\Middleware\Authenticate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::middleware('jwt.auth')->post('/register', [AuthController::class, 'register']);
+//Route::middleware('jwt.auth')->post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+//Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
+//Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
+Route::middleware('custom.jwt')->post('/paste', [PasteController::class, 'createPaste']);
 Route::get('/paste/{hash}', [PasteController::class, 'getPaste']);
 Route::middleware('auth:sanctum')->get('/pastes', [PasteController::class, 'getPastes']);
+Route::middleware('custom.jwt')->get('/pastes', [PasteController::class, 'getPastes']);
 
