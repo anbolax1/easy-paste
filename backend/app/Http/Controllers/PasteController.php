@@ -70,6 +70,7 @@ class PasteController extends Controller
                     $query->where('visibility', Paste::VISIBILITY_PUBLIC);
                 } else if (auth()->check()) {
                     $query->where('user_id', auth()->id());
+                    $query->whereIn('visibility', [Paste::VISIBILITY_PUBLIC, Paste::VISIBILITY_PRIVATE]);
                 }
             })
             ->latest()
