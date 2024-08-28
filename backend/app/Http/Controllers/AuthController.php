@@ -69,7 +69,7 @@ class AuthController extends Controller
                 cookie('login', $request->login, 60, '/', null, null, true),
             ];
             if ($token) {
-                return response()->json(['token' => $token])->withCookie($cookies);
+                return response()->json(['token' => $token]);
             }
 
             throw new \Exception( 'Unauthorized', 401);
@@ -81,12 +81,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-
-        if(!$user) {
-            return response()->json(['message' => 'Пользователь не найден'], 401);
+        if(auth()->check()) {
+            auth()->user()->tokens()->delete();
         }
+        /*if(!$user) {
+            return response()->json(['message' => 'Пользователь не найден'], 401);
+        }*/
 
-        $user->tokens()->delete();
+//        $user->tokens()->delete();
 
         return response()->json(['message' => 'Токен удалён']);
     }

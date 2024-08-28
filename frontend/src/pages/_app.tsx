@@ -1,15 +1,13 @@
-import { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import '../styles/global.css';
+import {AuthProvider} from "../contexts/AuthContext";
 
 function MyApp({ Component, pageProps }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
     return (
-        <>
-            <Navbar isAuthenticated={isAuthenticated} />
-            <Component {...pageProps} setIsAuthenticated={setIsAuthenticated} />
-        </>
+        <AuthProvider>
+            <Navbar />
+            <Component {...pageProps} />
+        </AuthProvider>
     );
 }
 

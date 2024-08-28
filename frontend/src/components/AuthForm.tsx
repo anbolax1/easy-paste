@@ -1,14 +1,15 @@
 import styles from "../styles/AuthForm.module.css";
 import {useState} from "react";
 
-const AuthForm = ({onSubmit, buttonText}) => {
+const AuthForm = ({onSubmit, buttonText, errorMessage}) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSubmit({login, password}); // Передаем данные формы в родительский компонент
+        setError('');
+        onSubmit({login, password});
     };
 
     const handleChange = (e) => {
@@ -40,6 +41,7 @@ const AuthForm = ({onSubmit, buttonText}) => {
                     required/>
                 <button type="submit">{buttonText}</button>
                 {error && <span style={{ color: 'red' }}>{error}</span>}
+                {errorMessage && <span style={{ color: 'red' }}>{errorMessage}</span>}
             </form>
         </div>
     );

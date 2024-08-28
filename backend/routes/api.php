@@ -26,7 +26,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/test', [AuthController::class, 'test']);
 //Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
 //Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
 Route::middleware('custom.jwt')->post('/paste', [PasteController::class, 'createPaste']);
