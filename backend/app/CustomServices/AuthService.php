@@ -1,5 +1,5 @@
 <?php
-namespace App\Services;
+namespace App\CustomServices;
 
 use Tymon\JWTAuth\Facades\JWTAuth;
 

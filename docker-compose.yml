@@ -5,8 +5,8 @@ services:
     container_name: back
     build:
       context: ./backend
-    volumes:
-      - ./backend:/var/www
+#    volumes:
+#      - ./backend:/var/www
     ports:
       - "9000:9000"
     networks:
@@ -15,8 +15,8 @@ services:
   frontend:
     build:
       context: ./frontend
-    volumes:
-      - ./frontend:/app
+#    volumes:
+#      - ./frontend:/app
     ports:
       - "3000:3000"
     command: sh -c "npm run build && npm start"

@@ -2,7 +2,7 @@ FROM node:18
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json package-lock.json ./
 
 RUN npm install
 
@@ -12,4 +12,4 @@ RUN cp .env.example .env
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD \[ -d "node_modules" \] && npm run start || npm ci && npm run start
