@@ -3,6 +3,6 @@
 3. Собираем и запускаем контейнеры: docker compose up -d
 4. Заходим в контейнер бэка и накатываем миграции: docker exec -it back bash -> php artisan migrate
 5. Готово.
-   WEB - http://localost
-   API - http://localhost/api
-   PMA - http://localhost:8080
+   WEB - http://localhost;
+   5/API - http://localhost/api;
+   PMA - http://localhost:8080;
