@@ -55,16 +55,21 @@ class PasteController extends Controller
     {
         $privateMode = $request->privateMode;
 
+        $pastes = [];
+        if(!$privateMode && !auth()->check()){
+            return response()->json($pastes);
+        }
+
         $pastes = DB::table('pastes')
             ->where(function ($query) {
                 $query->where('expires_at', '>', now())
                     ->orWhereNull('expires_at');
             })
-            ->where(function($query) {
-                if (auth()->check()) {
-                    $query->where('user_id', auth()->id());
-                } else {
+            ->where(function($query) use ($privateMode) {
+                if ($privateMode == Paste::VISIBILITY_PUBLIC) {
                     $query->where('visibility', Paste::VISIBILITY_PUBLIC);
+                } else if (auth()->check()) {
+                    $query->where('user_id', auth()->id());
                 }
             })
             ->latest()
