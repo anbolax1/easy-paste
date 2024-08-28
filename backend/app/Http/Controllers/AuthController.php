@@ -64,8 +64,12 @@ class AuthController extends Controller
             $credentials = $request->only('login', 'password');
 
             $token = $this->authService->authenticateUser($credentials);
+            $cookies = [
+                cookie('token', $token, 60, '/', null, null, true),
+                cookie('login', $request->login, 60, '/', null, null, true),
+            ];
             if ($token) {
-                return response()->json(['token' => $token]);
+                return response()->json(['token' => $token])->withCookie($cookies);
             }
 
             throw new \Exception( 'Unauthorized', 401);
