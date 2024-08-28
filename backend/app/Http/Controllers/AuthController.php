@@ -7,6 +7,7 @@ use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -44,7 +45,7 @@ class AuthController extends Controller
                 return response()->json(['token' => $token]);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
     }
 
@@ -67,9 +68,9 @@ class AuthController extends Controller
                 return response()->json(['token' => $token]);
             }
 
-            return response()->json(['message' => 'Unauthorized'], 401);
+            throw new \Exception( 'Unauthorized', 401);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()], $e->getCode());
         }
     }
 
@@ -83,6 +84,10 @@ class AuthController extends Controller
 
         $user->tokens()->delete();
 
+        return response()->json(['message' => 'Токен удалён']);
+    }
+
+    public function test(Request $request) {
         return response()->json(['message' => 'Токен удалён']);
     }
 }

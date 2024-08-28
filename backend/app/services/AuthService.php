@@ -9,20 +9,17 @@ class AuthService
     {
         try {
             if(!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Неверные логин и/или пароль!'], 401);
+                throw new \Exception( 'Неверные логин и/или пароль!', 401);
+//                return response()->json(['error' => 'Неверные логин и/или пароль!'], 401);
             }
+            return $token;
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            throw new \Exception($e->getMessage(), $e->getCode());
         }
+    }
 
-        return response()->json(compact('token'));
-       /* if (auth()->attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('API Token')->plainTextToken;
-
-            return explode('|', $token)[1];
-        }
-
-        return null;*/
+    public function test()
+    {
+        return response()->json(['token' => '111111111111111111111111111111111111'], 401);
     }
 }
