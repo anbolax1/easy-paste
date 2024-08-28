@@ -20,7 +20,7 @@ const PasteView = () => {
 
     useEffect(() => {
         const fetchPaste = async () => {
-            const res = await fetch(`http://localhost/api/paste/${hash}`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/${hash}`);
             const data = await res.json();
             setPaste(data);
         };

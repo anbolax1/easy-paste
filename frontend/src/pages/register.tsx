@@ -10,7 +10,7 @@ const Register = () => {
     const handleRegister = async ({ login, password }) => {
         setErrorMessage('');
         try {
-            const response = await axios.post('/api/register', { login, password });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_API}/register`, { login, password });
             if(response.data.token) {
                 logIn(response.data.token);
             }

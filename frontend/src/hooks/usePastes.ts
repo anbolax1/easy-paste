@@ -8,7 +8,7 @@ const usePastes = () => {
 
     useEffect(() => {
         const fetchPastes = async () => {
-            const res = await fetch('http://localhost/api/pastes');
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/pastes`);
             const data = await res.json();
             setPastes(data);
         };
@@ -25,7 +25,7 @@ const usePastes = () => {
                 };
             }
 
-            const res = await fetch('http://localhost/api/pastes', { method: 'GET', headers });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/pastes`, { method: 'GET', headers });
             const data = await res.json();
             setUserPastes(data);
         };
