@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paste;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PasteController extends Controller
 {
@@ -49,29 +51,25 @@ class PasteController extends Controller
         return response()->json($paste);
     }
 
-    public function getPastes()
+    public function getPastes(Request $request)
     {
-        // Проверяем, авторизован ли пользователь
-        if (auth()->check()) {
-            // Если авторизован, получаем 10 последних записей пользователя
-            $pastes = Paste::where('user_id', auth()->id())
-                ->where(function($query) {
-                    $query->where('expires_at', '>', now())
-                        ->orWhereNull('expires_at');
-                })
-                ->latest()
-                ->take(10)
-                ->get();
-        } else {
-            // Если не авторизован, получаем 10 последних записей
-            $pastes = Paste::where(function($query) {
-                    $query->where('expires_at', '>', now())
-                        ->orWhereNull('expires_at');
-                })
-                ->latest()
-                ->take(10)
-                ->get();
-        }
+        $privateMode = $request->privateMode;
+
+        $pastes = DB::table('pastes')
+            ->where(function ($query) {
+                $query->where('expires_at', '>', now())
+                    ->orWhereNull('expires_at');
+            })
+            ->where(function($query) use ($privateMode) {
+                if ($privateMode == Paste::VISIBILITY_PUBLIC) {
+                    $query->where('visibility', Paste::VISIBILITY_PUBLIC);
+                } else if (auth()->check()) {
+                    $query->where('user_id', auth()->id());
+                }
+            })
+            ->latest()
+            ->take(10)
+            ->get();
 
         return response()->json($pastes);
     }

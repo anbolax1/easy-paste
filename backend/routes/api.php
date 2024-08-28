@@ -31,6 +31,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 //Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
 Route::middleware('custom.jwt')->post('/paste', [PasteController::class, 'createPaste']);
 Route::get('/paste/{hash}', [PasteController::class, 'getPaste']);
-Route::middleware('auth:sanctum')->get('/pastes', [PasteController::class, 'getPastes']);
+//Route::middleware('auth:sanctum')->get('/pastes', [PasteController::class, 'getPastes']);
 Route::middleware('custom.jwt')->get('/pastes', [PasteController::class, 'getPastes']);
 
