@@ -1,8 +1,7 @@
 import PasteItemView from "../components/Paste/PasteItemView";
-// import {getPasteInfo, getPastes} from "../functions/getData";
-// import {NextPageContext} from "next";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import {useAuth} from "../contexts/AuthContext";
 
 interface Paste {
     title: string;
@@ -13,14 +12,22 @@ interface Paste {
 }
 
 const PasteView = () => {
+    const { token } = useAuth();
+
     const router = useRouter();
     const [paste, setPaste] = useState<Paste | null>(null);
 
     const hash = router.query.hash;
 
     useEffect(() => {
+        let headers = {};
+        if (token) {
+            headers = {
+                'Authorization': `Bearer ${token}`
+            };
+        }
         const fetchPaste = async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/${hash}`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/${hash}`,{ method: 'GET', headers });
             const data = await res.json();
             setPaste(data);
         };
