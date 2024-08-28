@@ -19,6 +19,7 @@ COPY . .
 
 RUN cp .env.example .env
 
+RUN composer update --no-dev
 RUN composer install
 
 RUN chown -R www-data:www-data /var/www

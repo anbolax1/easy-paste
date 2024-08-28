@@ -11,7 +11,7 @@ const Home = ({}) => {
     return (
         <div className={styles.container}>
             <h1>{isAuth ? 'Добро пожаловать!' : 'Пожалуйста, войдите'}</h1>
-            <PasteList title='Все пасты' pastes={pastes}/>
+            <PasteList title='Публичные пасты' pastes={pastes}/>
             {userPastes.length > 0 && <PasteList title='Мои пасты' pastes={userPastes}/>}
         </div>
 

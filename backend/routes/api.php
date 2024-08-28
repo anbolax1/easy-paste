@@ -20,17 +20,11 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-//Route::middleware('jwt.auth')->post('/register', [AuthController::class, 'register']);
-//Route::middleware('jwt.auth')->post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/test', [AuthController::class, 'test']);
-//Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-//Route::middleware('auth:sanctum')->post('/paste', [PasteController::class, 'createPaste']);
 Route::middleware('custom.jwt')->post('/paste', [PasteController::class, 'createPaste']);
-Route::get('/paste/{hash}', [PasteController::class, 'getPaste']);
-//Route::middleware('auth:sanctum')->get('/pastes', [PasteController::class, 'getPastes']);
+Route::middleware('custom.jwt')->get('/paste/{hash}', [PasteController::class, 'getPaste']);
 Route::middleware('custom.jwt')->get('/pastes', [PasteController::class, 'getPastes']);
 

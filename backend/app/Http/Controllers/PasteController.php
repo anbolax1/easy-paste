@@ -60,11 +60,11 @@ class PasteController extends Controller
                 $query->where('expires_at', '>', now())
                     ->orWhereNull('expires_at');
             })
-            ->where(function($query) use ($privateMode) {
-                if ($privateMode == Paste::VISIBILITY_PUBLIC) {
-                    $query->where('visibility', Paste::VISIBILITY_PUBLIC);
-                } else if (auth()->check()) {
+            ->where(function($query) {
+                if (auth()->check()) {
                     $query->where('user_id', auth()->id());
+                } else {
+                    $query->where('visibility', Paste::VISIBILITY_PUBLIC);
                 }
             })
             ->latest()

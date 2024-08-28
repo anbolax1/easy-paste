@@ -27,7 +27,7 @@ const PasteView = () => {
             };
         }
         const fetchPaste = async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/${hash}`,{ method: 'GET', headers });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/paste/${hash}`,{ method: 'GET', headers });
             const data = await res.json();
             setPaste(data);
         };

@@ -92,8 +92,4 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Токен удалён']);
     }
-
-    public function test(Request $request) {
-        return response()->json(['message' => 'Токен удалён']);
-    }
 }

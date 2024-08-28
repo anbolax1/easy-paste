@@ -8,7 +8,10 @@ const usePastes = () => {
 
     useEffect(() => {
         const fetchPastes = async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/pastes`);
+            const params = new URLSearchParams({
+                privateMode: 'public'
+            })
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/pastes?${params.toString()}`, );
             const data = await res.json();
             setPastes(data);
         };
