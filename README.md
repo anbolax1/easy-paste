@@ -4,5 +4,5 @@
 4. Заходим в контейнер бэка и накатываем миграции: docker exec -it back bash -> php artisan migrate
 5. Готово.
    WEB - http://localhost;
-   5/API - http://localhost/api;
+   API - http://localhost/api;
    PMA - http://localhost:8080;
